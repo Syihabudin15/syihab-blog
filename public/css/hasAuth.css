@@ -1,0 +1,119 @@
+.my-dashboard{
+    display: flex;
+    padding: 30px 0;
+    
+}
+.menu-dashboard{
+    /* background-image: linear-gradient(rgb(0, 0, 120), rgb(31, 31, 255)); */
+    background-color: rgb(31, 31, 255);
+    color: white;
+    padding: 20px;
+    height: 78vh;
+    width: 25vw;
+    border-right: 1px solid rgb(166, 166, 166);
+    transition: 500ms;
+}
+.menu-dashboard p{
+    font-weight: bold;
+    font-size: .9em;
+    border: 1px solid rgb(214, 214, 214);
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 500ms;
+    box-sizing: border-box;
+}
+.menu-dashboard a{
+    text-decoration: none;
+    color: white;
+}
+.menu-dashboard p:hover{
+    transition: 500ms;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+.main{
+    height: 78vh;
+    padding: 10px;
+    width: 100%;
+    overflow-y: scroll;
+}
+.close-icon{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgb(237, 237, 237);
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+.close-icon span{
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+.close-icon span:hover{
+    box-shadow: 2px 2px 5px rgb(107, 107, 107);
+    transform: scale(1.05);
+}
+.inlined{
+    display: none;
+}
+.collapsed span{
+    padding: 10px;
+}
+.collapsed p{
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.active-menu{
+    animation: activeMenu 3s infinite linear;
+    box-shadow: 2px 2px 5px rgb(0, 0, 128);
+}
+
+
+/* Mobile */
+@media only screen and (max-width: 800px){
+    .menu-dashboard{
+        position: absolute;
+        width: 50vw;
+        z-index: 5;
+    }
+    .collapsed{
+        width: 12vw;
+        padding: 0;
+        padding-top: 10px;
+        position: static;
+    }
+    .menu-dashboard p:hover{
+        transition: 300ms;
+        padding-left: 20px;
+        box-sizing: border-box;
+    }
+}
+
+/* Windows */
+@media only screen and (min-width: 800px){
+    .collapsed{
+        width: 7vw;
+    }
+}
+
+@keyframes activeMenu {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.05);
+    }
+    100%{
+        transform: scale(1);
+    }
+}

@@ -1,0 +1,44 @@
+@extends("layouts")
+@section('content')
+
+<div class="my-dashboard">
+    {{-- Menu Dashboard --}}
+    <section title="Menu Navigaton Dashboard" class="menu-dashboard collapsed" id="menu-wrapper">
+        <div>
+            <div class="close-icon">
+                <div class="anyclass inlined">Main Menu</div>
+                <span title="Hide menu bar" onclick="handleCollapse()">x</span>
+            </div>
+            <div class="p-3">
+                <a href="/usr/dashboard">
+                    <p class="{{Request::is('usr/dashboard') ? "active-menu" : ""}}">
+                        P
+                        <span class="anyclass inlined">Profile</span>
+                    </p>
+                </a>
+                <a href="/usr/myblog">
+                    <p class="{{Request::is('usr/myblog') ? "active-menu" : ""}}">
+                        P
+                        <span class="anyclass inlined">My Blog</span>
+                    </p>
+                </a>
+                <a href="/usr/setting">
+                    <p class="{{Request::is('usr/setting') ? "active-menu" : ""}}">
+                        P
+                        <span class="anyclass inlined">Setting</span>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </section>
+    {{-- End Menu Dashboard --}}
+    
+
+    {{-- Content Here --}}
+    <section title="Main Dashboard" class="main">
+        @yield('main')
+    </section>
+    {{-- End Content --}}
+</div>
+<script src="/js/script.js"></script>
+@endsection

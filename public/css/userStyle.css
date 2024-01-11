@@ -1,0 +1,95 @@
+.dash-wrapper h1{
+    font-size: 1.4em;
+    border-bottom: 1px solid rgb(160, 160, 160);
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.dash-list{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.dash-item{
+    background-color: white;
+    box-shadow: 2px 2px 5px rgb(91, 91, 91);
+    padding: 10px;
+    min-width: 120px;
+    border-radius: 10px;
+    text-align: center;
+}
+.dash-item h3{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.dash-item p{
+    font-weight: bold;
+    font-size: 1.3em;
+}
+.dash-table{
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 10px;
+    margin: 50px auto;
+    overflow: auto;
+}
+.dash-table h2{
+    border-bottom: 1px solid rgb(161, 161, 161);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    font-size: 1.2em;
+    box-sizing: border-box;
+}
+.dash-table table{
+    overflow: auto;
+}
+.form-setting{
+    background-color: white;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+    flex-wrap: wrap-reverse;
+}
+.setting-desc{
+    width: 30%;
+    text-align: justify;
+    line-height: 2;
+}
+.is-user-form{
+    width: 40%;
+}
+.user-form{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.user-form input{
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 5px;
+}
+.btn-setting{
+    width: 50%;
+    margin: 50px auto;
+}
+.btn-setting button{
+    width: 100%;
+    border: 1px solid blue;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
+
+/* Mobile */
+@media only screen and (max-width: 800px){
+    .is-user-form{
+        width: 100%;
+    }
+    .setting-desc{
+        width: 100%;
+    }
+}

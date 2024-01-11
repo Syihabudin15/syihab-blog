@@ -1,2 +1,4 @@
 User-agent: *
-Disallow:
+allow: /
+
+Sitemap: https://syihab-blog.vercel.app/

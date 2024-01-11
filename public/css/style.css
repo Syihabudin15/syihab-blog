@@ -7,6 +7,11 @@ html, body{
     width: 100vw;
     overflow-x: hidden;
 }
+.errors{
+    font-size: 13px;
+    font-style: italic;
+    color: red;
+}
 .menu-wrapper{
     display: flex;
     justify-content: space-between;
@@ -237,7 +242,6 @@ html, body{
     font-style: italic;
 }
 .sb{
-    /* border: 1px solid rgb(173, 173, 173); */
     padding: 10px 12px;
     border-radius: 50%;
     box-sizing: border-box;
@@ -283,6 +287,9 @@ html, body{
 @media only screen and (min-width: 800px){
     .mynav{
         margin-right: 100px;
+    }
+    .mynav ul li{
+        padding: 0 10px;
     }
     .img-header{
         margin-right: 100px;

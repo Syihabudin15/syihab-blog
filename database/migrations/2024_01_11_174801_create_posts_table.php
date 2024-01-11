@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string("image", 255);
             $table->string("excerp", 255);
             $table->text("body");
+            $table->string("keywords", 255);
             $table->integer("view", false)->length(100);
             $table->integer("like", false)->length(100);
             $table->timestamps();

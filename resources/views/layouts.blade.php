@@ -17,6 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/hasAuth.css">
         <link rel="stylesheet" href="/css/userStyle.css">
@@ -34,20 +35,48 @@
                 <div class="collapse navbar-collapse mynav" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item {{Request::is('/') ? "active" : ""}}">
-                    <a class="nav-link" title="Home" href="/">Home</a>
+                    <a class="nav-link" title="Home" href="/">
+                        <i class="bi bi-house-fill"></i>
+                        Home
+                    </a>
                     </li>
-                    <li class="nav-item {{Request::is('usr/dashboard') ? "active" : ""}}">
-                    <a class="nav-link" title="Home" href="/usr/dashboard">Dashboard</a>
-                    </li>
+                    @if (Auth::user())
+                        <li class="nav-item {{Request::is('usr/dashboard') ? "active" : ""}}">
+                        <a class="nav-link" title="Home" href="/usr/dashboard">
+                            <i class="bi bi-speedometer2"></i>
+                            Dashboard
+                        </a>
+                        </li>
+                    @endif
                     <li class="nav-item {{Request::is('blog') ? "active" : ""}}">
-                    <a class="nav-link" title="Daftar Blog" href="/blog">Blogs</a>
+                    <a class="nav-link" title="Daftar Blog" href="/blog">
+                        <i class="bi bi-book-half"></i>
+                        Blogs
+                    </a>
                     </li>
                     <li class="nav-item {{Request::is('categories') ? "active" : ""}}">
-                    <a class="nav-link" title="Daftar Kategori" href="/categories">Categories</a>
+                    <a class="nav-link" title="Daftar Kategori" href="/categories">
+                        <i class="bi bi-bounding-box"></i>
+                        Categories
+                    </a>
                     </li>
-                    <li class="nav-item {{Request::is('auth/register') ? "active" : ""}}">
-                    <a class="nav-link" title="Registration" href="/auth/register">Register</a>
-                    </li>
+                    @if (Auth::user())
+                        <li class="nav-item {{Request::is('auth/register') ? "active" : ""}}">
+                            
+                            <a class="nav-link text-danger" title="Registration" href="/auth/logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Logout
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item {{Request::is('auth/register') ? "active" : ""}}">
+                            
+                            <a class="nav-link text-info" title="Registration" href="/auth/register">
+                                <i class="bi bi-box-arrow-in-right"></i>
+                                Register
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 </div>
             </div>

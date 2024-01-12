@@ -86,12 +86,17 @@
     cursor: pointer;
 }
 .editor{
-    width: 90vw;
+    width: 100%;
 }
 .create-post-wrap{
     padding: 20px;
     box-sizing: border-box;
     margin-top: 50px;
+    background-color: rgb(251, 251, 251);
+}
+.create-post-wrap form{
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 
@@ -103,5 +108,8 @@
     }
     .setting-desc{
         width: 100%;
+    }
+    .create-post-wrap .input-post{
+        width: 80vw;
     }
 }

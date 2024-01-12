@@ -6,15 +6,15 @@
     <div class="dash-list">
         <div class="dash-item text-primary">
             <h3>Total Artikel</h3>
-            <p>5</p>
+            <p>{{count($all)}}</p>
         </div>
         <div class="dash-item text-success">
             <h3>Di Posting</h3>
-            <p>3</p>
+            <p>{{$posting}}</p>
         </div>
         <div class="dash-item text-danger">
             <h3>Tidak Di Posting</h3>
-            <p>3</p>
+            <p>{{$unPost}}</p>
         </div>
     </div>
     <div>
@@ -40,13 +40,19 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    <tr>
-                        <td>Metode Pengembangan</td>
-                        <td>System Development Lifecycle</td>
-                        <td>11/01/2024</td>
-                        <td>2324</td>
-                        <td>1320</td>
-                    </tr>
+                    @foreach ($all as $item)
+                        <tr>
+                            <td>{{$item->category->name}}</td>
+                            <td>
+                                <a href="/blog/{{$item->slug}}">
+                                    {{$item->title}}
+                                </a>
+                            </td>
+                            <td>{{\Carbon\Carbon::parse($item->updatedAt)->format('d-m-Y')}}</td>
+                            <td>{{$item->view}}</td>
+                            <td>{{$item->like}}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
     </div>

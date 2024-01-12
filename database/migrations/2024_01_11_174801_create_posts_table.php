@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("category_id")->constrained("categories");
             $table->string("title", 220);
             $table->string("slug", 255);
-            $table->string("image", 255);
+            $table->string("image", 255)->nullable();
             $table->string("excerp", 255);
             $table->text("body");
             $table->string("keywords", 255);

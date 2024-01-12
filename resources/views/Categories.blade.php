@@ -13,7 +13,7 @@
         <a href="/categories/{{$category->slug}}">
             <article class="cards-category p-2">
                 <div class="card-img-category">
-                    <img src="/assets/read-boy.png" width="100%" height="100%" >
+                    <img src="{{$category->image}}" width="100%" height="100%" >
                     <h2>{{$category->name}}</h2>
                 </div>
             </article>

@@ -208,6 +208,8 @@ html, body{
 .cards-category{
     background-color: white;
     border-radius: 20px;
+    width: 250px;
+    height: 250px;
     box-shadow: 2px 2px 5px rgb(97, 97, 97);
 }
 .card-img-category{
@@ -217,6 +219,7 @@ html, body{
 }
 .card-img-category img{
     position: relative;
+    border-radius: 10px;
 }
 .card-img-category h2{
     font-size: 1.3em;
@@ -301,11 +304,42 @@ html, body{
     box-shadow: 2px 2px 5px rgb(133, 133, 133);
     cursor: pointer;
 }
-
+.isLight{
+    text-decoration: none;
+    color: white;
+}
+.btn-tiny{
+    width: 50%;
+    margin: 50px auto;
+}
+.btn-tiny button{
+    width: 100%;
+}
+.input-post{
+    width: 50vw;
+    padding: 20px;
+    margin: 20px auto;
+}
+.art-slug-img{
+    width: 50vw;
+    height: 300px;
+    margin: 20px auto;
+}
+.clas{
+    font-size: 30px;
+}
+.author-slug{
+    border-bottom: 1px solid rgb(156, 156, 156);
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
 
 
 /* Mobile */
 @media only screen and (max-width: 800px){
+    .art-slug-img{
+        width: 80vw;
+    }
     .header-text{
         width: 100vw;
         margin-top: 50px;
@@ -342,6 +376,10 @@ html, body{
     }
     .img-coment i{
         padding: 5px 10px;
+    }
+    .cards-category{
+        width: 200px;
+        height: 200px;
     }
 }
 

@@ -3,56 +3,90 @@
 
 <section title="List Article" class="py-5 px-3">
     <section class="articles">
-        <div>
-            <h1 class="text-center py-4">Judul Artikel</h1>
-            <section title="list item category" class="list-art my-5 art-list text-justify px-4">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti voluptate illo excepturi quidem, expedita totam numquam fugit eaque quibusdam ratione.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque in animi totam nobis quod iste quisquam temporibus eum eius tempora pariatur dolorem voluptatem enim nam inventore numquam, esse maxime natus cumque modi omnis doloribus necessitatibus? Est quasi doloribus officia debitis aliquam corrupti facilis alias omnis ab rem mollitia in, explicabo, excepturi nobis! Laboriosam beatae similique asperiores alias necessitatibus, maiores mollitia quos inventore commodi temporibus, non harum distinctio odit reiciendis? Obcaecati saepe repudiandae perspiciatis suscipit minima, fugit animi perferendis quis doloremque excepturi, velit quasi modi quod praesentium doloribus aut dolores qui necessitatibus ut illo? Cumque rerum fuga sunt reiciendis aspernatur mollitia quasi consectetur! Tempore magnam fugit cum necessitatibus reprehenderit nam qui. Numquam sit voluptate tempore, suscipit sequi, voluptatum quo velit fuga ipsam dicta minima! Ratione commodi consequatur blanditiis asperiores aliquam illo soluta. Accusantium voluptatibus expedita cum odio totam, quod explicabo consectetur voluptas laboriosam aspernatur aperiam maxime assumenda similique sequi! Sunt praesentium ipsa soluta provident! Sunt eaque esse, blanditiis architecto, atque illo quidem odio incidunt earum mollitia minima? Perferendis, molestiae nesciunt ab earum illo rem cupiditate neque quo eos facere labore consequuntur fuga, tempore sed natus porro obcaecati similique omnis tempora praesentium sequi eius. Eveniet debitis, dolorum tempora omnis quas iusto molestiae.</p>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa distinctio iste natus tempora sapiente consectetur nemo delectus, velit adipisci exercitationem non quo nesciunt iure soluta quae illum nobis fugit facere sit reiciendis explicabo ipsam aperiam quibusdam. Est, eaque? Eos nisi odit illum molestias in ex eius cumque facere explicabo expedita perspiciatis nemo officia minus, sed repellat architecto laborum sit beatae aut nostrum nam aspernatur! Iure temporibus dolore fuga eius vel perspiciatis, ipsam eveniet consectetur minus reiciendis quam itaque libero voluptate quibusdam maxime delectus maiores tempora fugiat necessitatibus sunt explicabo ducimus modi similique. At ad, fugit rem libero repellat ex incidunt fuga corrupti veniam qui, amet commodi laudantium numquam sed adipisci tenetur reiciendis vitae quaerat. Doloribus fuga id architecto exercitationem velit, aperiam, molestias quasi iure labore earum nulla. Asperiores soluta, similique deserunt possimus ad exercitationem iure laudantium magnam eos optio officiis quo commodi quod, culpa fugit. Consectetur ad ducimus voluptatum perferendis, iusto illum veniam, sit consequatur similique eum nemo quae ipsum doloremque cumque voluptatem officiis, dicta officia eaque quos aut laudantium tempora omnis quo sequi. Error, voluptas. Consequuntur consectetur sint distinctio beatae, vel alias, harum error reprehenderit tempore numquam voluptatum perspiciatis maiores culpa laboriosam repellat itaque similique iste natus repellendus eos.</p>
-            </section>
-            <div class="likes">
-                <i class="bi bi-hand-thumbs-up btn-outline-primary"></i>
-                <i class="bi bi-hand-thumbs-down btn-outline-danger"></i>
+        @if ($msg = Session::get('success'))
+            <div class="alert alert-success alert-block" style="width: 300px;margin:20px auto">
+                <button type="button" class="close" data-dismiss="alert">×</button>	
+                <strong>{{ $msg }}</strong>
             </div>
+        @endif
+        @if ($msg = Session::get('error'))
+            <div class="errors">
+                <p>{{$msg}}</p>
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <ul class="errors">
+                @foreach ($errors->all() as $msg)
+                    <li>{{$msg}}</li>
+                @endforeach
+            </ul>
+        @endif
+        <div>
+            @if ($data->image)
+                <div class="art-slug-img">
+                    <img src="{{$data->image}}" alt="{{$data->slug}}" width="100%" height="100%">
+                </div>
+            @endif
+            <h1 class="text-center py-4">{{$data->title}}</h1>
+            <div class="d-flex justify-content-between align-items-center author-slug">
+                <div class="d-flex">
+                    <i class="bi bi-person clas"></i>
+                    <div class="ml-4">
+                        <span class="d-block">{{$data->user->name}}</span>
+                        <span>{{\Carbon\Carbon::parse($data->createdAt)->format("d-m-Y")}}</span>
+                    </div>
+                </div>
+                <div>
+                    <i class="bi bi-eye-fill"></i>
+                    {{$data->view}}
+                </div>
+            </div>
+            <section title="list item category" class="list-art my-5 art-list text-justify px-4" >
+                {!!html_entity_decode($data->body)!!}
+            </section>
+            {{-- Likes --}}
+            <div class="likes">
+                <div id="like-act" class="d-flex align-items-center">
+                    <i class="bi bi-hand-thumbs-up btn-outline-primary"></i>
+                    <div class="text-center p-2 ml-3 font-weight-bold" id="like-value">{{$data->like}}</div>
+                </div>
+                <div id="dislike-act" class="d-flex align-items-center">
+                    <i class="bi bi-hand-thumbs-down btn-outline-danger"></i>
+                    <div class="text-center p-2 ml-3 font-weight-bold">0</div>
+                </div>
+            </div>
+            {{-- End Likes --}}
+            {{-- Tags --}}
             <div>
                 <span>#Tags: </span>
-                <span class="btn btn-outline-info btn-sm">Tag1</span>
-                <span class="btn btn-outline-info btn-sm">Tag1</span>
-                <span class="btn btn-outline-info btn-sm">Tag1</span>
+                @foreach (explode(',', $data->keywords) as $item)
+                    <span class="btn btn-outline-info btn-sm">{{$item}}</span>
+                @endforeach
             </div>
+            {{-- End Tags --}}
         </div>
         <section title="Short Tools" class="short-tools mt-5">
             <div class="search-tool">
-                <input placeholder="cari artikel" >
-                <div class="result-search-tools">
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                </div>
-                <div class="more">
-                    <a href="/">more..</a>
-                </div>
-            </div>
-            <div class="search-tool">
                 <h3>Populer</h3>
                 <div class="result-search-tools">
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
+                    @foreach ($populer as $item)
+                        <a href="/blog/{{$item->slug}}">{{$item->title}}</a>
+                    @endforeach
                 </div>
                 <div class="more">
-                    <a href="/">more..</a>
+                    <a href="/blog">more..</a>
                 </div>
             </div>
             <div class="search-tool">
                 <h3>Hot Kategori</h3>
                 <div class="result-search-tools">
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
+                    @foreach ($hot as $item)
+                        <a href="/categories/{{$item->slug}}">{{$item->name}}</a>
+                    @endforeach
                 </div>
                 <div class="more">
-                    <a href="/">more..</a>
+                    <a href="/categories">more..</a>
                 </div>
             </div>
         </section>
@@ -62,37 +96,42 @@
         <div>
             <div>
                 {{-- Root --}}
-                <div class="cmt cmt-root">
-                    <div class="img-coment">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div >
-                        <div class="cmt-author">
-                            <span class="d-block name">Syihabudin</span>
-                            <span class="status">People</span>
+                @foreach ($comments as $item)
+                    <div class="cmt cmt-root">
+                        <div class="img-coment">
+                            <i class="bi bi-person"></i>
                         </div>
-                        <div class="cmt-desc">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut, ea?
-                        </div>
-                    </div>
-                </div>
-                {{-- End Root --}}
-                
-                {{-- Reply --}}
-                <div class="cmt cmt-reply">
-                    <div class="img-coment">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div >
-                        <div class="cmt-author">
-                            <span class="d-block name">Syihabudin</span>
-                            <span class="status">People</span>
-                        </div>
-                        <div class="cmt-desc">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut, ea?
+                        <div >
+                            <div class="cmt-author">
+                                <span class="d-block name">{{$item->user->name ?? "Anonymous"}}</span>
+                                <span class="status">{{$item->user_id == $data->user->id? "Author" : "People"}}</span>
+                            </div>
+                            <div class="cmt-desc">
+                                {{$item->message}}
+                            </div>
                         </div>
                     </div>
-                </div>
+                    {{-- End Root --}}
+                    
+                    {{-- Reply --}}
+                    @foreach ($item->reply as $reply)
+                        <div class="cmt cmt-reply">
+                            <div class="img-coment">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <div >
+                                <div class="cmt-author">
+                                    <span class="d-block name">{{$reply->user->name ?? "Anonymous"}}</span>
+                                    <span class="status">{{$reply->user_id == $data->user->id? "Author" : "People"}}</span>
+                                </div>
+                                <div class="cmt-desc">
+                                    {{$reply->message}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    
+                @endforeach
                 {{-- End Reply --}}
                 <div class="cmt cmt-reply">
                     <div class="img-coment">
@@ -100,13 +139,15 @@
                     </div>
                     <div >
                         <div>Buat Balasan</div>
-                        <form>
+                        <form action="/reply" method="POST">
+                            @csrf
+                            @method("post")
                             <div>
-                                <label></label>
-                                <textarea name="" id=""></textarea>
+                                <input value="{{$item->id}}" name="comment_id" class="d-none">
+                                <textarea name="message" id="message"></textarea>
                             </div>
                             <div class="justify-content-center mt-2">
-                                <button class="btn btn-primary">Balas</button>
+                                <button class="btn btn-primary" type="submit">Balas</button>
                             </div>
                         </form>
                     </div>
@@ -119,13 +160,15 @@
                         </div>
                         <div >
                             <div>Buat komen</div>
-                            <form>
+                            <form action="/comment" method="POST">
+                                @csrf
+                                @method('post')
                                 <div>
-                                    <label></label>
-                                    <textarea ></textarea>
+                                    <input class="d-none" name="post_id" value="{{$data->id}}">
+                                    <textarea name="message"></textarea>
                                 </div>
                                 <div class="d-flex justify-content-center mt-2">
-                                    <button class="btn btn-primary">Komen</button>
+                                    <button type="submit" class="btn btn-primary">Komen</button>
                                 </div>
                             </form>
                         </div>
@@ -137,5 +180,28 @@
         </div>
     </section>
 </section>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+    var data = @json($data);
+    $('#like-act').on("click", function(){
+        $.ajax({
+            type: 'GET',
+            url: `http://127.0.0.1:8000/like/${data.slug}`,
+            success: function(res) {
+                $("#like-value").html(res.data);
+            }
+        })
+    })
+    setInterval(() => {
+        $.ajax({
+            type: 'GET',
+            url: `http://127.0.0.1:8000/getlike/${data.slug}`,
+            success: function(res) {
+                $("#like-value").html(res.data);
+            }
+        });
+    }, 10000);
+})
+</script>
 @endsection

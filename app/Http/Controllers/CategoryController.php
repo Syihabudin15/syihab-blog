@@ -57,11 +57,11 @@ class CategoryController extends Controller
 
         $find = Category::where("slug", "=", $slug)->first();
         if(request("page")){
-            $data = Post::where('category_id', "=", $find->id)->skip(ceil(($page-1)*5))->take(5)->get();
+            $data = Post::where('category_id', "=", $find->id)->where("isPost", "=", true)->skip(ceil(($page-1)*5))->take(5)->get();
         }else{
-            $data = Post::where('category_id', "=", $find->id)->take(5)->get();
+            $data = Post::where('category_id', "=", $find->id)->where("isPost", "=", true)->take(5)->get();
         }
-        $art = Post::latest()->take(5)->get();
+        $art = Post::latest()->where("isPost", "=", true)->take(5)->get();
         $cate = Category::latest()->take(5)->get();
         return view("CategorySlug", [
             "metadata" => [

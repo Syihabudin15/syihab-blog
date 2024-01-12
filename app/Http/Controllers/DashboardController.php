@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function Index(){
-        $all = Post::latest();
-        $posting = $all->where("isPost", "=", true)->get();
-        $unPost = $all->where("isPost", "=", false)->get();
+        $temp = Post::where("user_id", "=", Auth::user()->id);
+        $all = $temp->get();
+        $posting = $temp->where("isPost", "=", true)->get();
+        $unPost = $temp->where("isPost", "=", false)->get();
         return view('User.Dashboard', [
             "metadata" => [
                 "title" => "Dashboard | SB",
@@ -38,13 +40,14 @@ class DashboardController extends Controller
     }
 
     public function MyBlog(){
+        $all = Post::where("user_id", "=", Auth::user()->id)->get();
         return view('User.Myblog', [
             "metadata" => [
                 "title" => "My Blog | SB",
                 "meta" => collect([
                     "description" => "Menampilkan list blog atau artikel yang telah anda buat. termasuk yang telah diposting, belum diposting maupun yang telah diposting.",
                     "robots" => "index, follow",
-                    "keywords" => "my blog sb, my blog syihab blog, blog saya, artikel saya sb, sb my blog",
+                    "keywords" => "my blog sb, my blog syihab blog, blog saya, artikel saya sb, sb my blog, blog ".Auth::user()->name,
                     "og:title" => "My Blog | SB",
                     "og:description" => "Menampilkan list blog atau artikel yang telah anda buat. termasuk yang telah diposting, belum diposting maupun yang telah diposting.",
                     "og:url" => "https://syihab-blog.vercel.app/usr/myblog",
@@ -54,9 +57,10 @@ class DashboardController extends Controller
                 ]),
                 "link" => collect([
                     "canonical" => "https://syihab-blog.vercel.app/usr/myblog",
-                    "url" => "https://syihab-blog.vercel.app/usr/dashboard"
+                    "url" => "https://syihab-blog.vercel.app/usr/myblog"
                 ])
-            ]
+            ],
+            "myPost" => $all
         ]);
     }
 
@@ -109,6 +113,7 @@ class DashboardController extends Controller
     }
     
     public function CreatePost(){
+        $category = Category::latest()->get();
         return view('User.CreatePost', [
             "metadata" => [
                 "title" => "Create Article | SB",
@@ -127,7 +132,8 @@ class DashboardController extends Controller
                     "canonical" => "https://syihab-blog.vercel.app/blog",
                     "url" => "https://syihab-blog.vercel.app/blog"
                 ])
-            ]
+            ],
+            "categories" => $category
         ]);
     }
 }

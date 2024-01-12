@@ -123,6 +123,7 @@ html, body{
     justify-content: space-evenly;
     align-items: center;
     gap: 20px;
+    line-height: 2;
     flex-wrap: wrap;
 }
 .list-art a{
@@ -247,6 +248,61 @@ html, body{
     box-sizing: border-box;
     box-shadow: 1px 1px 5px rgb(173, 173, 173);
 }
+.comment-wrap{
+    background-color: white;
+    padding: 10px;
+    color: rgb(124, 124, 124);
+    box-sizing: border-box;
+}
+.img-coment{
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221, 221, 221);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.cmt-author{
+    line-height: 1.2;
+    font-weight: bold;
+    font-size: 14px;
+}
+.cmt-author .status{
+    opacity: .7;
+}
+.cmt-reply{
+    margin-left: 40px;
+}
+.cmt{
+    padding: 10px;
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid rgb(212, 212, 212);
+}
+.likes{
+    margin-left: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+.likes i{
+    width: 50px;
+    height: 50px;
+    padding: 10px 10px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px rgb(133, 133, 133);
+    cursor: pointer;
+}
+
+
 
 /* Mobile */
 @media only screen and (max-width: 800px){
@@ -281,6 +337,12 @@ html, body{
     .short-tools{
         display: none;
     }
+    .comment-wrap{
+        box-sizing: border-box;
+    }
+    .img-coment i{
+        padding: 5px 10px;
+    }
 }
 
 /* Windowns */
@@ -312,6 +374,9 @@ html, body{
     }
     .art-list{
         width: 75vw;
+    }
+    .comment-wrap{
+        padding: 30px;
     }
 }
 

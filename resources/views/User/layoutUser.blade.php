@@ -18,7 +18,7 @@
                 </a>
                 @if (Auth::user()->role == "ADMIN")
                     <a href="/usr/categories">
-                        <p class="{{Request::is('usr/myblog') ? "active-menu" : ""}}">
+                        <p class="{{Request::is('usr/categories') ? "active-menu" : ""}}">
                             <i class="bi bi-bounding-box"></i>
                             <span class="anyclass inlined">Categories</span>
                         </p>
@@ -48,5 +48,4 @@
     </section>
     {{-- End Content --}}
 </div>
-<script src="/js/script.js"></script>
 @endsection

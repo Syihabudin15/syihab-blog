@@ -82,6 +82,18 @@
     color: white;
     border-radius: 5px;
 }
+.edit:hover{
+    cursor: pointer;
+}
+.editor{
+    width: 90vw;
+}
+.create-post-wrap{
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+
 
 
 /* Mobile */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -24,6 +25,41 @@ class PostController extends Controller
                 "link" => collect([
                     "canonical" => "https://syihab-blog.vercel.app/blog",
                     "url" => "https://syihab-blog.vercel.app/blog"
+                ])
+            ]
+        ]);
+    }
+
+    public function HandleUpload(Request $request){
+        if($request->hasFile('upload')){
+            $content = file_get_contents($_GET["url"]);
+            $info = getimagesizefromstring($content);
+            header('Content-Type:' . $info["mime"]);
+            $path = Cloudinary::upload($request['file']->getRealPath())->getSecurePath();
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            @header('Content-type: text/html; charset=utf-8'); 
+            echo $content;
+        }
+    }
+
+    public function ArtikelSlug($slug){
+        return view('ArticleSlug', [
+            "metadata" => [
+                "title" => $slug,
+                "meta" => collect([
+                    "description" => "Slug meruapakan blablablal sadjwrsadnmsad",
+                    "robots" => "index, follow",
+                    "keywords" => $slug,
+                    "og:title" => $slug,
+                    "og:description" => "Slug meruapakan blablablal sadjwrsadnmsad",
+                    "og:url" => "https://syihab-blog.vercel.app/blog/".$slug,
+                    "og:sitename" => "Syihab Blog",
+                    "og:type" => "article",
+                    "og:locale" => "en_US"
+                ]),
+                "link" => collect([
+                    "canonical" => "https://syihab-blog.vercel.app/blog/".$slug,
+                    "url" => "https://syihab-blog.vercel.app/blog/".$slug
                 ])
             ]
         ]);

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,14 +43,21 @@ Route::get('/', function () {
 
 Route::get('/auth/register', [AuthController::class, "Register"]);
 Route::post('/auth/register', [AuthController::class, "HandleRegister"]);
-Route::get('/auth/login', [AuthController::class, "Login"]);
+Route::get('/auth/login', [AuthController::class, "Login"])->name('login');
 Route::post('/auth/login', [AuthController::class, "HandleLogin"]);
-Route::get('/auth/logout', [AuthController::class, "HandleLogout"]);
+Route::get('/auth/logout', [AuthController::class, "HandleLogout"])->middleware('auth');
 
 Route::get('/categories', [CategoryController::class, "Index"]);
+Route::post('/categories', [CategoryController::class, "Create"]);
+Route::get('/categories/{slug}', [CategoryController::class, "CategorySlug"]);
 
 Route::get('/blog', [PostController::class, "Index"]);
+Route::get('/blog/{slug}', [PostController::class, "ArtikelSlug"]);
+Route::post('/blog/create', [PostController::class, "HandleUpload"]);
 
-Route::get('/usr/dashboard', [DashboardController::class, "Index"]);
-Route::get('/usr/myblog', [DashboardController::class, "MyBlog"]);
-Route::get('/usr/setting', [DashboardController::class, "Setting"]);
+Route::get('/usr/dashboard', [DashboardController::class, "Index"])->middleware('auth');
+Route::get('/usr/myblog', [DashboardController::class, "MyBlog"])->middleware('auth');
+Route::get('/usr/myblog/create', [DashboardController::class, "CreatePost"])->middleware('auth');
+Route::get('/usr/categories', [DashboardController::class, "Categories"])->middleware('auth');
+Route::get('/usr/setting', [DashboardController::class, "Setting"])->middleware('auth');
+Route::put('/usr/setting', [UserController::class, "Update"])->middleware('auth');

@@ -2,7 +2,7 @@
 @section('main')
 
 <section class="dash-wrapper">
-    <h1>Selamat Datang Syihabudin</h1>
+    <h1>Selamat Datang {{Auth::user()->name}}</h1>
     <div class="dash-list">
         <div class="dash-item text-primary">
             <h3>Total Artikel</h3>

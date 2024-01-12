@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function Index(){
+        $all = Post::latest();
+        $posting = $all->where("isPost", "=", true)->get();
+        $unPost = $all->where("isPost", "=", false)->get();
         return view('User.Dashboard', [
             "metadata" => [
                 "title" => "Dashboard | SB",
@@ -26,7 +30,10 @@ class DashboardController extends Controller
                     "canonical" => "https://syihab-blog.vercel.app/usr/dashboard",
                     "url" => "https://syihab-blog.vercel.app/usr/dashboard"
                 ])
-            ]
+            ],
+            "all" => $all,
+            "posting" => count($posting),
+            "unPost" => count($unPost)
         ]);
     }
 

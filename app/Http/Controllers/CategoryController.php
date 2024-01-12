@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Exception;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class CategoryController extends Controller
             $data = Category::latest()->take(5)->get();
         }
         return view("Categories", [
+            
             "metadata" => [
                 "title" => "Categories | SB",
                 "meta" => collect([
@@ -48,15 +50,28 @@ class CategoryController extends Controller
         ]);
     }
     public function CategorySlug($slug){
+        $page = (int)request("page") || 1;
+        $data = [];
+        $art = [];
+        $cate = [];
+
+        $find = Category::where("slug", "=", $slug)->first();
+        if(request("page")){
+            $data = Post::where('category_id', "=", $find->id)->skip(ceil(($page-1)*5))->take(5)->get();
+        }else{
+            $data = Post::where('category_id', "=", $find->id)->take(5)->get();
+        }
+        $art = Post::latest()->take(5)->get();
+        $cate = Category::latest()->take(5)->get();
         return view("CategorySlug", [
             "metadata" => [
-                "title" => $slug,
+                "title" => "Kategori ".$find->name,
                 "meta" => collect([
-                    "description" => "Berikut List atau daftar kategori di Syihab Blog. IT, Programming, SEO, Bisnis, Elektronik, Olahraga",
+                    "description" => "Daftar blog atau artikel dari kategori ".$find->name,
                     "robots" => "index, follow",
-                    "keywords" => "daftar kategori, list kategori, kategori it, kategori seo, kategori elektronik, kategori olahraga, kategori web, kategori android",
-                    "og:title" => $slug,
-                    "og:description" => "Berikut List atau daftar kategori di Syihab Blog. IT, Programming, SEO, Bisnis, Elektronik, Olahraga",
+                    "keywords" => "daftar kategori, list kategori, kategori it, kategori seo, kategori elektronik, kategori olahraga, kategori web, kategori android,".$slug.",".$find->name,
+                    "og:title" => "Kategori ".$find->name,
+                    "og:description" => "Daftar blog atau artikel dari kategori ".$find->name,
                     "og:url" => "https://syihab-blog.vercel.app/categories/".$slug,
                     "og:sitename" => "Syihab Blog",
                     "og:type" => "article",
@@ -66,7 +81,13 @@ class CategoryController extends Controller
                     "canonical" => "https://syihab-blog.vercel.app/categories/".$slug,
                     "url" => "https://syihab-blog.vercel.app/categories/".$slug,
                 ])
-            ]
+            ],
+            "articles" => $data,
+            "title" => $find->name,
+            "total" => ceil(count($data)/5),
+            "slug" => $find->slug,
+            "populer" => $art,
+            "hot" => $cate
         ]);
     }
 

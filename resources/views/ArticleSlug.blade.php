@@ -187,7 +187,7 @@ $(document).ready(function(){
     $('#like-act').on("click", function(){
         $.ajax({
             type: 'GET',
-            url: `http://127.0.0.1:8000/like/${data.slug}`,
+            url: `https://syihab-blog.vercel.app/like/${data.slug}`,
             success: function(res) {
                 $("#like-value").html(res.data);
             }
@@ -196,7 +196,7 @@ $(document).ready(function(){
     setInterval(() => {
         $.ajax({
             type: 'GET',
-            url: `http://127.0.0.1:8000/getlike/${data.slug}`,
+            url: `https://syihab-blog.vercel.app/getlike/${data.slug}`,
             success: function(res) {
                 $("#like-value").html(res.data);
             }

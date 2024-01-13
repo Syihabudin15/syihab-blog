@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::dropIfExists('comments');
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId("post_id")->constrained("posts");
-            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("user_id")->nullable()->constrained("users");
             $table->text("message");
             $table->integer("like", false)->length(100);
             $table->integer("dislike", false)->length(100);

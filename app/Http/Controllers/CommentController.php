@@ -25,7 +25,7 @@ class CommentController extends Controller
             $find = Post::findOrFail($validate['post_id']);
             return redirect('/blog/'.$find->slug)->with(['success' => "Berhasil dikirim"]);
         }catch(Exception $exc){
-            return redirect('/blog/'.$find->slug)->with(['error' => $exc->getMessage()]);
+            return redirect('/blog')->with(['error' => $exc->getMessage()]);
         }
     }
 }

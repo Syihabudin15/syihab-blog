@@ -2,26 +2,26 @@
 @section("content")
 
 <section title="List Article" class="py-5 px-3">
-    <section class="articles">
-        @if ($msg = Session::get('success'))
-            <div class="alert alert-success alert-block" style="width: 300px;margin:20px auto">
-                <button type="button" class="close" data-dismiss="alert">×</button>	
-                <strong>{{ $msg }}</strong>
-            </div>
-        @endif
-        @if ($msg = Session::get('error'))
-            <div class="errors">
-                <p>{{$msg}}</p>
-            </div>
-        @endif
+    @if ($msg = Session::get('success'))
+        <div class="alert alert-success alert-block" style="width: 300px;margin:20px auto">
+            <button type="button" class="close" data-dismiss="alert">×</button>	
+            <strong>{{ $msg }}</strong>
+        </div>
+    @endif
+    @if ($msg = Session::get('error'))
+        <div class="errors">
+            <p>{{$msg}}</p>
+        </div>
+    @endif
 
-        @if ($errors->any())
-            <ul class="errors">
-                @foreach ($errors->all() as $msg)
-                    <li>{{$msg}}</li>
-                @endforeach
-            </ul>
-        @endif
+    @if ($errors->any())
+        <ul class="errors">
+            @foreach ($errors->all() as $msg)
+                <li>{{$msg}}</li>
+            @endforeach
+        </ul>
+    @endif
+    <section class="articles">
         <div>
             @if ($data->image)
                 <div class="art-slug-img">
@@ -133,25 +133,27 @@
                     
                 @endforeach
                 {{-- End Reply --}}
-                <div class="cmt cmt-reply">
-                    <div class="img-coment">
-                        <i class="bi bi-person"></i>
+                @if (count($comments) > 0)
+                    <div class="cmt cmt-reply">
+                        <div class="img-coment">
+                            <i class="bi bi-person"></i>
+                        </div>
+                        <div >
+                            <div>Buat Balasan</div>
+                            <form action="/reply" method="POST">
+                                @csrf
+                                @method("post")
+                                <div>
+                                    <input value="{{$item->id}}" name="comment_id" class="d-none">
+                                    <textarea name="message" id="message"></textarea>
+                                </div>
+                                <div class="justify-content-center mt-2">
+                                    <button class="btn btn-primary" type="submit">Balas</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div >
-                        <div>Buat Balasan</div>
-                        <form action="/reply" method="POST">
-                            @csrf
-                            @method("post")
-                            <div>
-                                <input value="{{$item->id}}" name="comment_id" class="d-none">
-                                <textarea name="message" id="message"></textarea>
-                            </div>
-                            <div class="justify-content-center mt-2">
-                                <button class="btn btn-primary" type="submit">Balas</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                @endif
                 {{-- Input Root--}}
                 <div >
                     <div class="cmt cmt-root cmt-input">

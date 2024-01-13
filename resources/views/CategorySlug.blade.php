@@ -30,16 +30,6 @@
             
         </div>
         <section title="Short Tools" class="short-tools">
-            {{-- <div class="search-tool">
-                <input placeholder="cari artikel" >
-                <div class="result-search-tools">
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                    <a href="/">Programming</a>
-                </div>
-                <div class="more">
-                    <a href="/">more..</a>
-                </div>
             </div> --}}
             <div class="search-tool">
                 <h3>Populer</h3>

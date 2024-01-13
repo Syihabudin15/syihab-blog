@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
     public function Index(){
-        $page = (int)request("page") || 1;
+        $page = (int)request("page") ?? 1;
         $data = [];
         $art = Post::latest()->take(5)->get();
         $cate = Category::latest()->take(5)->get();

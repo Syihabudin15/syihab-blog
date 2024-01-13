@@ -334,7 +334,6 @@ html, body{
     box-sizing: border-box;
 }
 
-
 /* Mobile */
 @media only screen and (max-width: 800px){
     .art-slug-img{

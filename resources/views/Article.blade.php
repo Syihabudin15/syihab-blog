@@ -31,10 +31,10 @@
             </section>
             <section title="Pagination" class="paginate">
                 @for ($i = 1; $i <= $total; $i++)
-                    <span class="{{request('page') ? request('page') == $i ? "page-active" : "" : "page-active"}}">
-                        <a class="text-light" href="/categories?page={{$i}}">1</a>
-                    </span>
-                @endfor
+                <span class="{{(request('page') ? (request('page') == $i ? "page-active" : "text-dark") : ($i == 1 ? "page-active" : "text-dark"))}}">
+                    <a class="text-light" id="paginte" href="/blog?page={{$i}}">{{$i}}</a>
+                </span>
+            @endfor
             </section>
         </div>
         <section title="Short Tools" class="short-tools">

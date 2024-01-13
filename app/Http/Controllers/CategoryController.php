@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function Index(){
-        $page = (int)request("page") || 1;
+        $page = (int)request("page") ?? 1;
         $data = [];
 
         if(request("page")){
@@ -25,6 +25,7 @@ class CategoryController extends Controller
         }else{
             $data = Category::latest()->take(5)->get();
         }
+        $total = Category::latest()->get();
         return view("Categories", [
             
             "metadata" => [
@@ -46,11 +47,11 @@ class CategoryController extends Controller
                 ])
             ],
             "categories" => $data,
-            "total" => ceil(count($data)/5)
+            "total" => ceil(count($total)/5)
         ]);
     }
     public function CategorySlug($slug){
-        $page = (int)request("page") || 1;
+        $page = (int)request("page") ?? 1;
         $data = [];
         $art = [];
         $cate = [];
@@ -63,6 +64,7 @@ class CategoryController extends Controller
         }
         $art = Post::latest()->where("isPost", "=", true)->take(5)->get();
         $cate = Category::latest()->take(5)->get();
+        $total = Post::latest()->get();
         return view("CategorySlug", [
             "metadata" => [
                 "title" => "Kategori ".$find->name,
@@ -84,7 +86,7 @@ class CategoryController extends Controller
             ],
             "articles" => $data,
             "title" => $find->name,
-            "total" => ceil(count($data)/5),
+            "total" => ceil(count($total)/5),
             "slug" => $find->slug,
             "populer" => $art,
             "hot" => $cate

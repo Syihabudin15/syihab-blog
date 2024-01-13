@@ -52,6 +52,7 @@ Route::get('/auth/logout', [AuthController::class, "HandleLogout"])->middleware(
 Route::get('/categories', [CategoryController::class, "Index"]);
 Route::post('/categories', [CategoryController::class, "Create"]);
 Route::get('/categories/{slug}', [CategoryController::class, "CategorySlug"]);
+Route::put('/categories', [CategoryController::class, "Update"]);
 
 Route::get('/blog', [PostController::class, "Index"]);
 Route::get('/blog/{slug}', [PostController::class, "ArtikelSlug"]);

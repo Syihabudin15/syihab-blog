@@ -50,7 +50,7 @@
                         <td>{{$category->slug}}</td>
                         <td>
                             <span class="btn btn-info edit" data-toggle="modal" data-target="#editModal" onclick="onEdit('{{$category->id}}','{{$category->name}}')">
-                                <i class="bi bi-person"></i>
+                                <i class="bi bi-pencil-square"></i>
                             </span>
                         </td>
                     </tr>
